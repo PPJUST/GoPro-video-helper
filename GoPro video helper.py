@@ -55,10 +55,10 @@ def walk_path(path):
     for i in full_files:
         if os.path.isfile(i) and os.path.splitext(i)[1].upper() == '.MP4':
             video_files.append(i)  # 提取出mp4后缀的文件
-    rename_files(video_files)
+    select_mode(video_files)
 
 
-def rename_files(files):
+def select_mode(files):
     """修改文件名"""
     '''
     GoPro7文件名规则：
@@ -79,13 +79,7 @@ def rename_files(files):
 
 
 def run_rename(files, gopro_mode):
-    """GoPro7重命名规则"""
-    # 命名思路：1.文件名后四位放到集合中，得到所有视频组编号 2.创建字典，key为视频组编号，value为视频分卷路径
-    '''
-    GoPro7文件名规则：
-    例如：GH010320.mp4，GH010321.mp4，GH020320.mp4
-    GH 为固定前缀，01 为视频组的第1个视频，0320 为视频编号，视频编号相同的为同一组视频
-    '''
+    """修改文件名"""
     video_group = {}  # 存放最终分类结果，key编号1024-value完整文件名
     for file in files:
         if get_filename(file)[-4:] not in video_group:  # 如果字典中没有该项，则添加空列表项
@@ -121,6 +115,7 @@ def run_rename(files, gopro_mode):
 
 
 def get_filename(x):
+    """提取文件名"""
     return os.path.splitext(os.path.split(x)[1])[0]
 
 
@@ -133,7 +128,6 @@ def hello():
 2. 改名完成后可以选择合并视频，合并方法为调用ffmepg无损合并。
 合并完成后，分段视频将会保存到单独的文件夹中。
 如果程序内没有ffmepg.exe请自行下载。
-
         '''
     print(word)
 
