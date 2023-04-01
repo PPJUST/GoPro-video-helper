@@ -66,8 +66,8 @@ def select_mode(files):
     GH 为固定前缀，01 为视频组的第1个视频，0320 为视频编号，视频编号相同的为同一组视频
     
     GoPro5文件名规则：
-    例如：GOPRO1024.mp4，GP011024.mp4，GP021024.mp4
-    GOPRO 开头的为视频组的第1个视频，1024 为视频编号，视频编号相同的为同一组视频，后续GP01为顺序编号
+    例如：GOPR1024.mp4，GP011024.mp4，GP021024.mp4
+    GOPR 开头的为视频组的第1个视频，1024 为视频编号，视频编号相同的为同一组视频，后续GP01为顺序编号
     '''
     check_first_file = os.path.split(files[0])[1]  # 提取第一个文件名
     if check_first_file.find('GH') != -1:
@@ -98,7 +98,7 @@ def run_rename(files, gopro_mode):
             if gopro_mode == "gopro7":
                 new_name_number = get_filename(value)[-6:-4]
             elif gopro_mode == "gopro5":
-                if value.find('GOPRO') != -1:  # 相比gopro7规则代码不同的地方
+                if value.find('GOPR') != -1:
                     new_name_number = '01'
                 else:
                     new_name_number = "{:02d}".format(int(get_filename(value)[-6:-4]) + 1)
