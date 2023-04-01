@@ -25,8 +25,9 @@ def ask_merge(video_group_copy):
             inputfiles_write = ""
             for i in sorted(video_group_copy[key]):
                 inputfiles_write += "file '" + i + "'\n"
-            with open('inputfiles.txt', 'w') as iw:
+            with open('inputfiles.txt', 'w', encoding='utf-8') as iw:
                 iw.write(inputfiles_write)
+            time.sleep(0.1)  # 测试
             output_file = key
             command = f"ffmpeg -f concat -safe 0 -i inputfiles.txt -c copy {output_file}"
             subprocess.run(command)
@@ -72,7 +73,7 @@ def select_mode(files):
     check_first_file = os.path.split(files[0])[1]  # 提取第一个文件名
     if check_first_file.find('GH') != -1:
         run_rename(files, 'gopro7')
-    elif check_first_file.find('GOPRO') != -1 or check_first_file.find('GP') != -1:
+    elif check_first_file.find('GOPR') != -1 or check_first_file.find('GP') != -1:
         run_rename(files, 'gopro5')
     else:
         pass  # 占位，不清楚其他型号的命名规则
@@ -125,9 +126,9 @@ def hello():
 1. 输入GoPro视频所在文件夹路径，程序会自动改名。
 改名格式为“GoPro_拍摄日期-时间_内部编号_第几个视频”，示例GoPro_20230101-12.50.05_0021_01.mp4
 
-2. 改名完成后可以选择合并视频，合并方法为调用ffmepg无损合并。
+2. 改名完成后可以选择合并视频，合并方法为调用ffmpeg无损合并。
 合并完成后，分段视频将会保存到单独的文件夹中。
-如果程序内没有ffmepg.exe请自行下载。
+如果程序内没有ffmpeg.exe请自行下载。
         '''
     print(word)
 
