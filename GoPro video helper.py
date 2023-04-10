@@ -71,7 +71,7 @@ def select_mode(files):
     GOPR 开头的为视频组的第1个视频，1024 为视频编号，视频编号相同的为同一组视频，后续GP01为顺序编号
     '''
     check_first_file = os.path.split(files[0])[1]  # 提取第一个文件名
-    if check_first_file.find('GH') != -1:
+    if check_first_file.find('GH') != -1 or check_first_file.find('GX') != -1:
         run_rename(files, 'gopro7')
     elif check_first_file.find('GOPR') != -1 or check_first_file.find('GP') != -1:
         run_rename(files, 'gopro5')
