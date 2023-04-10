@@ -11,7 +11,7 @@ def get_path():
         walk_path(file_path)
     else:
         print('——————文件夹不存在——————')
-        get_path()
+        return get_path()
 
 
 def ask_merge(video_group_copy):
@@ -42,7 +42,7 @@ def ask_merge(video_group_copy):
         pass
     else:
         print('——————输入不正确——————')
-        ask_merge(video_group_copy)
+        return ask_merge(video_group_copy)
 
 
 def walk_path(path):
@@ -112,7 +112,10 @@ def run_rename(files, gopro_mode):
                 video_group_copy[new_key] = []
             video_group_copy[new_key].append(new_full_name)
     print('——————全部视频已改名——————')
-    ask_merge(video_group_copy)
+    if os.path.exists(os.path.join(os.getcwd(), 'ffmpeg.exe')):
+        ask_merge(video_group_copy)
+    else:
+        print('——————ffmpeg.exe 不存在，无法进行合并——————')
 
 
 def get_filename(x):
@@ -129,6 +132,9 @@ def hello():
 2. 改名完成后可以选择合并视频，合并方法为调用ffmpeg无损合并。
 合并完成后，分段视频将会保存到单独的文件夹中。
 如果程序内没有ffmpeg.exe请自行下载。
+
+注意：使用合并功能前确保ffmpeg.exe已经在同目录下
+注意：合并操作只能在改名后，没有做单独的合并功能
         '''
     print(word)
 
